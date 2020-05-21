@@ -1,0 +1,67 @@
+﻿@using WebsiteHocAVOnline.Models;
+@model List<Admin>
+
+@{
+    Layout = "~/Areas/ADmin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <a href="/ADmin/System/AddAccount" class="btn btn-danger btn-xs pull-right"><b>+</b> Thêm mới</a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Mã tài khoản</th>
+                                <th>Tài Khoản</th>
+                                <th>Mật khẩu</th>
+                                <th class="text-center">Quản lý</th>
+                            </tr>
+
+                        </thead>
+
+                        @{
+                            int i = 0;
+
+                            foreach (var item in Model)
+                            {
+                                i++;
+                                using (Html.BeginForm("DelAccount", "System", new { id = item.ID }))
+                                {
+
+                                    <tr>
+
+                                        <td>@i</td>
+                                        <td>@item.ID</td>
+                                        <td>@item.TenTK</td>
+                                        <td>******</td>
+                                        <td class="text-center">
+
+                                            <a href="/ADmin/System/EditAccount?id=@item.ID" class="btn btn-danger btn-xs"> Sửa</a>
+                                            |
+                                            <input type="submit" value="Xóa" class="btn btn-danger btn-xs" onclick="return confirm('Bạn có muốn xóa tài khoản: @item.TenTK ?')" />
+
+                                        </td>
+
+                                    </tr>
+
+                                }
+
+                            }
+
+                        }
+
+                    </table>
+
+                </div>
+
+
+            </div>
+          </div>
+      </div>
+</div>

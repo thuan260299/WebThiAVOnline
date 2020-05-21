@@ -1,0 +1,346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DBThiTrucTuyenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="TenTK" Type="nvarchar" MaxLength="50" />
+          <Property Name="MatKhau" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID_Category" />
+          </Key>
+          <Property Name="ID_Category" Type="int" Nullable="false" />
+          <Property Name="TênCategory" Type="nvarchar" MaxLength="50" />
+          <Property Name="ID_Admin" Type="int" />
+        </EntityType>
+        <EntityType Name="CauHoi">
+          <Key>
+            <PropertyRef Name="IDCauHoi" />
+          </Key>
+          <Property Name="IDCauHoi" Type="int" Nullable="false" />
+          <Property Name="CauHoi" Type="nvarchar(max)" />
+          <Property Name="A" Type="nvarchar" MaxLength="50" />
+          <Property Name="B" Type="nvarchar" MaxLength="50" />
+          <Property Name="C" Type="nvarchar" MaxLength="50" />
+          <Property Name="D" Type="nvarchar" MaxLength="50" />
+          <Property Name="DanAnDung" Type="nvarchar" MaxLength="50" />
+          <Property Name="ID_Category" Type="int" />
+        </EntityType>
+        <EntityType Name="Learning">
+          <Key>
+            <PropertyRef Name="ID_BaiHoc" />
+          </Key>
+          <Property Name="ID_BaiHoc" Type="int" Nullable="false" />
+          <Property Name="TenBaiHoc" Type="nvarchar(max)" />
+          <Property Name="Link" Type="varchar(max)" />
+          <Property Name="MoTa" Type="nvarchar(max)" />
+          <Property Name="ID_Category" Type="int" />
+        </EntityType>
+        <EntityType Name="TaiKhoan">
+          <Key>
+            <PropertyRef Name="IDTaiKhoan" />
+          </Key>
+          <Property Name="IDTaiKhoan" Type="int" Nullable="false" />
+          <Property Name="TenDangNhap" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MatKhau" Type="nvarchar" MaxLength="100" />
+          <Property Name="Hoten" Type="nvarchar" MaxLength="50" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="500" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="SDT" Type="int" />
+        </EntityType>
+        <EntityType Name="TaiLieu">
+          <Key>
+            <PropertyRef Name="IDTaiLieu" />
+          </Key>
+          <Property Name="IDTaiLieu" Type="int" Nullable="false" />
+          <Property Name="TenTaiLieu" Type="nvarchar(max)" />
+          <Property Name="DownLoad" Type="nvarchar(max)" />
+          <Property Name="Image" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_Category_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="Category" Type="Self.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Category">
+              <PropertyRef Name="ID_Admin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CauHoi_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="CauHoi" Type="Self.CauHoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID_Category" />
+            </Principal>
+            <Dependent Role="CauHoi">
+              <PropertyRef Name="ID_Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Learning_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Learning" Type="Self.Learning" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID_Category" />
+            </Principal>
+            <Dependent Role="Learning">
+              <PropertyRef Name="ID_Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBThiTrucTuyenModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CauHoi" EntityType="Self.CauHoi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Learning" EntityType="Self.Learning" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaiKhoan" EntityType="Self.TaiKhoan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaiLieu" EntityType="Self.TaiLieu" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Category_Admin" Association="Self.FK_Category_Admin">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="Category" EntitySet="Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CauHoi_Category" Association="Self.FK_CauHoi_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="CauHoi" EntitySet="CauHoi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Learning_Category" Association="Self.FK_Learning_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Learning" EntitySet="Learning" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBThiTrucTuyenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="TenTK" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MatKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Categories" Relationship="Self.FK_Category_Admin" FromRole="Admin" ToRole="Category" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID_Category" />
+          </Key>
+          <Property Name="ID_Category" Type="Int32" Nullable="false" />
+          <Property Name="TênCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Admin" Type="Int32" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK_Category_Admin" FromRole="Category" ToRole="Admin" />
+          <NavigationProperty Name="CauHois" Relationship="Self.FK_CauHoi_Category" FromRole="Category" ToRole="CauHoi" />
+          <NavigationProperty Name="Learnings" Relationship="Self.FK_Learning_Category" FromRole="Category" ToRole="Learning" />
+        </EntityType>
+        <EntityType Name="CauHoi">
+          <Key>
+            <PropertyRef Name="IDCauHoi" />
+          </Key>
+          <Property Name="IDCauHoi" Type="Int32" Nullable="false" />
+          <Property Name="CauHoi1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="A" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="B" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="D" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DanAnDung" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Category" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_CauHoi_Category" FromRole="CauHoi" ToRole="Category" />
+        </EntityType>
+        <EntityType Name="Learning">
+          <Key>
+            <PropertyRef Name="ID_BaiHoc" />
+          </Key>
+          <Property Name="ID_BaiHoc" Type="Int32" Nullable="false" />
+          <Property Name="TenBaiHoc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Category" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Learning_Category" FromRole="Learning" ToRole="Category" />
+        </EntityType>
+        <EntityType Name="TaiKhoan">
+          <Key>
+            <PropertyRef Name="IDTaiKhoan" />
+          </Key>
+          <Property Name="IDTaiKhoan" Type="Int32" Nullable="false" />
+          <Property Name="TenDangNhap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MatKhau" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Hoten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TaiLieu">
+          <Key>
+            <PropertyRef Name="IDTaiLieu" />
+          </Key>
+          <Property Name="IDTaiLieu" Type="Int32" Nullable="false" />
+          <Property Name="TenTaiLieu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DownLoad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Category_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="Category" Type="Self.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Category">
+              <PropertyRef Name="ID_Admin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CauHoi_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="CauHoi" Type="Self.CauHoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID_Category" />
+            </Principal>
+            <Dependent Role="CauHoi">
+              <PropertyRef Name="ID_Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Learning_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Learning" Type="Self.Learning" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID_Category" />
+            </Principal>
+            <Dependent Role="Learning">
+              <PropertyRef Name="ID_Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBThiTrucTuyenEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="CauHois" EntityType="Self.CauHoi" />
+          <EntitySet Name="Learnings" EntityType="Self.Learning" />
+          <EntitySet Name="TaiKhoans" EntityType="Self.TaiKhoan" />
+          <EntitySet Name="TaiLieux" EntityType="Self.TaiLieu" />
+          <AssociationSet Name="FK_Category_Admin" Association="Self.FK_Category_Admin">
+            <End Role="Admin" EntitySet="Admins" />
+            <End Role="Category" EntitySet="Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CauHoi_Category" Association="Self.FK_CauHoi_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="CauHoi" EntitySet="CauHois" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Learning_Category" Association="Self.FK_Learning_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Learning" EntitySet="Learnings" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBThiTrucTuyenModelStoreContainer" CdmEntityContainer="DBThiTrucTuyenEntities2">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="DBThiTrucTuyenModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TenTK" ColumnName="TenTK" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="DBThiTrucTuyenModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="ID_Category" ColumnName="ID_Category" />
+                <ScalarProperty Name="TênCategory" ColumnName="TênCategory" />
+                <ScalarProperty Name="ID_Admin" ColumnName="ID_Admin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CauHois">
+            <EntityTypeMapping TypeName="DBThiTrucTuyenModel.CauHoi">
+              <MappingFragment StoreEntitySet="CauHoi">
+                <ScalarProperty Name="IDCauHoi" ColumnName="IDCauHoi" />
+                <ScalarProperty Name="CauHoi1" ColumnName="CauHoi" />
+                <ScalarProperty Name="A" ColumnName="A" />
+                <ScalarProperty Name="B" ColumnName="B" />
+                <ScalarProperty Name="C" ColumnName="C" />
+                <ScalarProperty Name="D" ColumnName="D" />
+                <ScalarProperty Name="DanAnDung" ColumnName="DanAnDung" />
+                <ScalarProperty Name="ID_Category" ColumnName="ID_Category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Learnings">
+            <EntityTypeMapping TypeName="DBThiTrucTuyenModel.Learning">
+              <MappingFragment StoreEntitySet="Learning">
+                <ScalarProperty Name="ID_BaiHoc" ColumnName="ID_BaiHoc" />
+                <ScalarProperty Name="TenBaiHoc" ColumnName="TenBaiHoc" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="ID_Category" ColumnName="ID_Category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaiKhoans">
+            <EntityTypeMapping TypeName="DBThiTrucTuyenModel.TaiKhoan">
+              <MappingFragment StoreEntitySet="TaiKhoan">
+                <ScalarProperty Name="IDTaiKhoan" ColumnName="IDTaiKhoan" />
+                <ScalarProperty Name="TenDangNhap" ColumnName="TenDangNhap" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="Hoten" ColumnName="Hoten" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaiLieux">
+            <EntityTypeMapping TypeName="DBThiTrucTuyenModel.TaiLieu">
+              <MappingFragment StoreEntitySet="TaiLieu">
+                <ScalarProperty Name="IDTaiLieu" ColumnName="IDTaiLieu" />
+                <ScalarProperty Name="TenTaiLieu" ColumnName="TenTaiLieu" />
+                <ScalarProperty Name="DownLoad" ColumnName="DownLoad" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

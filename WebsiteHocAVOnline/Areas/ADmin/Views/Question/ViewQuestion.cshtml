@@ -1,0 +1,42 @@
+﻿@model WebsiteHocAVOnline.Models.CauHoi
+@{
+    ViewBag.Title = "ViewQuestion";
+    Layout = "~/Areas/ADmin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+
+    <h4 class="m-0 font-weight-bold text-primary">Đáp án câu hỏi bài học: <b>@Model.Category.TênCategory</b></h4>
+
+    <table class="table table-bordered">
+
+        <thead>
+
+            <tr>
+                <th>Mã câu hỏi</th>
+                <th>Câu hỏi</th>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+                <th>Đáp án</th>
+            </tr>
+
+        </thead>
+
+        <tr>
+            <td>@Model.IDCauHoi</td>
+            <td>@Model.CauHoi1</td>
+            <td>@Model.A</td>
+            <td>@Model.B</td>
+            <td>@Model.C</td>
+            <td>@Model.D</td>
+            <td><b>@Model.DanAnDung</b></td>
+        </tr>
+
+    </table>
+</div>
+<div>
+    <a href="/ADmin/Question" class="btn btn-danger btn-xs"> Trở về</a>
+</div>
+

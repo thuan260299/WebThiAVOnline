@@ -1,0 +1,11 @@
+﻿@model WebsiteHocAVOnline.Models.CauHoi
+@{
+    ViewBag.Title = "SortQuestion";
+    Layout = "~/Areas/ADmin/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="row">
+
+        @Html.DropDownList("ID_Category", (IEnumerable<SelectListItem>)ViewBag.List, "Lựa chọn bài học", new { @class = "form-control row sizeDrop" })
+    
+    </div>

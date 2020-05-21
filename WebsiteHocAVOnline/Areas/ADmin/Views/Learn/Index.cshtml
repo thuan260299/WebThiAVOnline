@@ -1,0 +1,54 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<WebsiteHocAVOnline.Models.Learning>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/ADmin/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="row">
+
+        <h4 class="m-0 font-weight-bold text-primary">Danh Sách Bài Học</h4>
+
+        <table class="table table-bordered">
+            <a href="/ADmin/Learn/AddLearn" class="btn btn-danger btn-xs pull-right"><b>+</b> Thêm mới</a>
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên bài học</th>
+                    <th class="text-center">Quản lý</th>
+                </tr>
+
+            </thead>
+
+ @{
+            int i = 0;
+
+            foreach (var item in Model)
+            {
+                i++;
+                using (Html.BeginForm("DelLearn", "Learn", new { id = item.ID_BaiHoc}))
+                {
+
+                    <tr>
+
+                        <td>@i</td>
+
+                        <td>@item.TenBaiHoc</td>
+
+                        <td class="text-center">
+                            <a href="/ADmin/Learn/EditLearn?id=@item.ID_BaiHoc" class="btn btn-primary btn-xs"> Sửa</a>
+                            <input type="submit" value="Xóa" class="btn btn-danger btn-xs" onclick="return confirm('Bạn có muốn xóa ?')" />
+
+                        </td>
+
+                    </tr>
+
+                }
+
+            }
+
+        }
+
+    </table>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>

@@ -1,0 +1,57 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<WebsiteHocAVOnline.Models.TaiLieu>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/ADmin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+
+    <h4 class="m-0 font-weight-bold text-primary">Danh Sách Tài Liệu</h4>
+
+    <table class="table table-bordered">
+        <a href="/Admin/Document/AddDoc" class="btn btn-danger btn-xs pull-right"><b>+</b> Thêm mới</a>
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Tài Liệu</th>
+                <th>Hình Ảnh</th>
+                <th class="text-center">Quản lý</th>
+            </tr>
+
+        </thead>
+
+        @{
+            int i = 0;
+
+            foreach (var item in Model)
+            {
+                i++;
+                using (Html.BeginForm("DelQuestion", "Question", new { id = item.IDTaiLieu }))
+                {
+
+                    <tr>
+
+                        <td>@i</td>
+                        <td>
+                            @item.TenTaiLieu
+
+                        </td>
+                        <td><img src="~/Assets/Dcimg/img/@item.Image" width="40px" height="60px" /></td>
+                        <td class="text-center">
+                            <a href="/ADmin//?id=@item.IDTaiLieu" class="btn btn-primary btn-xs"> Sửa</a>
+                            <input type="submit" value="Xóa" class="btn btn-danger btn-xs" onclick="return confirm('Bạn có muốn xóa tài khoản ?')" />
+
+                        </td>
+
+                    </tr>
+
+                }
+
+            }
+
+        }
+
+    </table>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>

@@ -1,0 +1,77 @@
+﻿@using WebsiteHocAVOnline.Models;
+@model List<TaiKhoan>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/ADmin/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Danh Sách Thành Viên</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Mã số</th>
+                                    <th>Họ và tên</th>
+                                    <th>Địa chỉ</th>
+                                    <th>Tên tài khoản</th>
+                                    <th>Mật khẩu</th>
+                                    <th class="text-center">Quản lý</th>
+                                </tr>
+
+                            </thead>
+
+                            @{
+                                int i = 0;
+
+                                foreach (var item in Model)
+                                {
+                                    i++;
+                                    using (Html.BeginForm("DelAccount", "System", new { id = item.IDTaiKhoan }))
+                                    {
+
+                                                        <tr>
+
+                                                            <td>@i</td>
+                                                            <td>@item.IDTaiKhoan</td>
+                                                            <td>@item.Hoten</td>
+                                                            <td>@item.DiaChi</td>
+                                                            <td>@item.TenDangNhap</td>
+
+                                                            <td>******</td>
+                                                            <td class="text-center">
+
+                                                                <a href="/ADmin/System/EditAccount?id=@item.IDTaiKhoan" class="btn btn-danger btn-xs"> Sửa</a>
+                                                                |
+                                                                <input type="submit" value="Xóa" class="btn btn-danger btn-xs" onclick="return confirm('Bạn có muốn xóa tài khoản: @item.TenDangNhap ?')" />
+
+                                                            </td>
+
+                                                        </tr>
+
+                                    }
+
+                                }
+
+                            }
+
+                        </table>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
